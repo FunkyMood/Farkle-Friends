@@ -8,6 +8,7 @@
     </a>
   </div>
   <Game></Game>
+  <Game></Game>
 </template>
 
 <script>
