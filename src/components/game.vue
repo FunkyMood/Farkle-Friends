@@ -1,6 +1,6 @@
 <template>
     <h1>{{ score }}</h1>
-    <div class="d-flex justify-content-center gap-3">
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
         <button @click="increasePoints(50)">+ 50</button>
         <button @click="increasePoints(100)">+ 100</button>
         <button @click="increasePoints(200)">+ 200</button>
