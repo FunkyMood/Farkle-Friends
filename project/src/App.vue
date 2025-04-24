@@ -7,8 +7,17 @@
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
+  <Game></Game>
 </template>
 
-<script setup>
+<script>
+
+import Game from './components/game.vue';
+
+export default {
+  components: {
+    Game
+  }
+}
 
 </script>
