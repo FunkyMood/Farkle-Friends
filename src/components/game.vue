@@ -2,7 +2,6 @@
     <h1>{{ score }}</h1>
     <div class="d-flex justify-content-center gap-3 flex-wrap">
         <ScoreButton @add-score="increaseScore"></ScoreButton>
-        <button @click="multipleTwo()">X2</button>
     </div>
     <button class="mt-2" @click="undo()">Undo</button>
 </template>
@@ -28,10 +27,6 @@ export default {
         },
         saveScore() {
             this.scoreStacks.push(this.score)
-        },
-        multipleTwo(){
-            this.saveScore();
-            this.score = this.score*2;
         },
         undo() {
             if (this.scoreStacks.length > 0) {
