@@ -1,16 +1,22 @@
 <template>
-    <div class="container-game">
-        <h1 class="score__title">{{ score }}</h1>
-        <div class="d-flex justify-content-center gap-3 flex-wrap">
-            <ScoreButton @add-score="increaseScore"></ScoreButton>
+    <div class="d-flex">
+        <button  class="btn-back" @click="goBack">Indietro</button>
+    </div>
+    <div v-for="n in numberOfPlayers" :key="n">
+        <div class="container-game">
+            <h1 class="score__title">{{ score }}</h1>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <ScoreButton @add-score="increaseScore"></ScoreButton>
+            </div>
+            <button class="mt-2" @click="undo()">Undo</button>
         </div>
-        <button class="mt-2" @click="undo()">Undo</button>
     </div>
 </template>
 
 <script>
 
 import ScoreButton from './scoreButton.vue';
+import { usePlayerStore } from '../stores/playerStore';
 
 export default {
     components: {
@@ -19,7 +25,8 @@ export default {
     data() {
         return {
             score: 0,
-            scoreStacks: []
+            scoreStacks: [],
+            numberOfPlayers: 0,
         }
     },
     methods: {
@@ -37,10 +44,14 @@ export default {
                 this.score = 0;
             }
         },
+        goBack() {
+            this.$router.push('/');
+        }
     },  
     
     mounted() {
-
+        const playerStore = usePlayerStore();
+        this.numberOfPlayers = playerStore.numberOfPlayers;
     }
 }
 </script>
@@ -55,7 +66,6 @@ export default {
             color: #ffffff;
             padding-bottom: 20px;
         }
-        
     }
 }
    
