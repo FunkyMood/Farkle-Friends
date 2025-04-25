@@ -1,9 +1,11 @@
 <template>
-    <h1>{{ score }}</h1>
-    <div class="d-flex justify-content-center gap-3 flex-wrap">
-        <ScoreButton @add-score="increaseScore"></ScoreButton>
+    <div class="container-game">
+        <h1 class="score__title">{{ score }}</h1>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <ScoreButton @add-score="increaseScore"></ScoreButton>
+        </div>
+        <button class="mt-2" @click="undo()">Undo</button>
     </div>
-    <button class="mt-2" @click="undo()">Undo</button>
 </template>
 
 <script>
@@ -42,3 +44,19 @@ export default {
     }
 }
 </script>
+
+<style lang="less">
+@media screen and (min-width: 300px) {
+    .container-game {
+        &:not(:first-of-type) {
+            padding-top: 20px;
+        }
+        .score__title {
+            color: #ffffff;
+            padding-bottom: 20px;
+        }
+        
+    }
+}
+   
+</style>
