@@ -1,7 +1,7 @@
 <template>
     <div class="container-welcome">
         <h1>Welcome to Farkle&Friends!<br>How many players?</h1>
-        <input class="w-50" type="number" v-model="numberOfPlayers" placeholder="Enter number of players"/>
+        <input class="w-50" type="number" v-model="numberOfPlayers" placeholder="Enter number"/>
         <button class="btn-start" @click="setPlayers">Start Game</button>
     </div>
     
