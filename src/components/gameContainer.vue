@@ -38,5 +38,7 @@ export default {
     .container-wrapper-games { 
         display: grid;
         gap: 30px;
+        padding: 0px 16px;
+        align-content: center;
     }
 </style>
