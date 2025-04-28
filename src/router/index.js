@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import Welcome from '../views/Welcome.vue'
 import gameContainer from '../components/gameContainer.vue'
 
@@ -16,7 +16,7 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHistory('/Farkle-Friends/'),
+    history: createWebHashHistory('/Farkle-Friends/'),
     routes
 })
 
