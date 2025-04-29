@@ -23,6 +23,12 @@ export default {
             numberOfPlayers: 0,
         }
     },
+    props: {
+        resetScore: {
+            type: Boolean,
+            default: false
+        }
+    },
     methods: {
         increaseScore(points){
             this.saveScore(points);
@@ -39,7 +45,12 @@ export default {
             }
         },
     },  
-    
+    watch:{
+        resetScore(){
+            this.score = 0;
+            
+        }
+    },
     mounted() {
     }
 }

@@ -1,10 +1,11 @@
 <template>
-    <div class="d-flex">
+    <div class="d-flex justify-content-between">
         <button  class="btn-back" @click="goBack">Indietro</button>
+        <button class="btn-back" @click="triggerReset">New Game</button>
     </div>
     <section class="container-wrapper-games">
         <div v-for="n in numberOfPlayers" :key="n">
-            <Game/>
+            <Game :reset-score="resetScoreFlag"/>
         </div>
     </section>
 </template>
@@ -20,11 +21,18 @@ export default {
     data() {
         return {
             numberOfPlayers: 0,
+            resetScoreFlag: false
         }
     },
     methods: {
         goBack() {
             this.$router.push('/');
+        },
+        triggerReset() {
+            this.resetScoreFlag = true;
+            this.$nextTick(() => {
+                this.resetScoreFlag = false;
+            })
         }
     },
     mounted() {
