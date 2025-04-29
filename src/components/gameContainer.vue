@@ -1,6 +1,6 @@
 <template>
     <div class="d-flex justify-content-between">
-        <button  class="btn-back" @click="goBack">Indietro</button>
+        <button  class="btn-back" @click="goBack">Go back</button>
         <button class="btn-back" @click="triggerReset">New Game</button>
     </div>
     <section class="container-wrapper-games">
