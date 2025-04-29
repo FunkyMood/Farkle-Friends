@@ -1,6 +1,6 @@
 <template>
     <div v-for="(label, points) in pointsMap" :key="points">
-        <button @click="increasePoints(points)">{{ label }}</button>
+        <button class="btn-score" @click="increasePoints(points)">{{ label }}</button>
     </div>
    
 </template>
@@ -34,3 +34,12 @@ export default {
 }
 
 </script>
+
+<style lang="less" scoped>
+    .btn-score {
+        &:focus,
+        &:focus-visible {
+            outline: 4px auto -webkit-focus-ring-color;
+        }
+    }
+</style>
