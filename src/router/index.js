@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import Welcome from '../views/Welcome.vue'
-import gameContainer from '../components/gameContainer.vue'
+import gameContainer from '../views/gameContainer.vue'
 
 const routes = [
     {

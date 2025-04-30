@@ -12,7 +12,7 @@
 
 <script>
 import { usePlayerStore } from '../stores/playerStore';
-import Game from './game.vue';
+import Game from '../components/game.vue';
 
 export default {
     components: {
