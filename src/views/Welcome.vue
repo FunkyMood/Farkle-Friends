@@ -1,8 +1,8 @@
 <template>
     <section class="container-welcome">
-        <h1>Welcome to Farkle&Friends!<br>How many players?</h1>
-        <input class="w-50" type="number" v-model="numberOfPlayers" placeholder="Enter number"/>
-        <button class="btn-start" @click="setPlayers">Start Game</button>
+        <h1>Welcome to Farkle&Friends!</h1>
+        <button class="btn-start" @click="setPlayers(1)">Points Counter</button>
+        <button class="btn-start" @click="setPlayers()">Game</button>
     </section>
 </template>
 
@@ -13,19 +13,25 @@ export default {
   data() {
     return {
       numberOfPlayers: 0,
-
+      playerStore: usePlayerStore(),
     }
   },
   mounted() {
-    const playerStore = usePlayerStore()
-    this.numberOfPlayers = playerStore.numberOfPlayers
+    this.numberOfPlayers = this.playerStore.players.length;
   },
   methods: {
-    setPlayers() {
-      const playerStore = usePlayerStore()
-      playerStore.setNumberOfPlayers(this.numberOfPlayers);
-      this.$router.push('/game');
+    setPlayers(number) {
+      this.playerStore.setNumberOfPlayers(number);
+      switch (number) {
+        case 1:
+          this.$router.push('/game');
+          break;
+        default:
+          this.$router.push('/players');
+          break;
+      }
     }
+
   }
 }
 </script>

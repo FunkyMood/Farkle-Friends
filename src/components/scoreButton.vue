@@ -1,11 +1,14 @@
 <template>
     <div v-for="(label, points) in pointsMap" :key="points">
-        <button class="btn-score" @click="increasePoints(points)">{{ label }}</button>
+        <button class="btn-score" @click="emitPoints(points)">{{ label }}</button>
     </div>
    
 </template>
 
 <script>
+
+import { usePlayerStore } from '../stores/playerStore'
+
 export default {
     data() {
         return {
@@ -19,17 +22,22 @@ export default {
                 600: "+ 600",
                 1000: "+ 1000",
                 1500: "+ 1500"
-            }
+            },
+            playerStore: usePlayerStore(),
         }
         
     },
     props:{
+        playerIndex: {
+            type: Number,
+            default: 0
+        }
     },
     methods: {
-        increasePoints(points) {
-            const numericPoints = Number(points)
-            this.$emit("add-score", numericPoints)
-        },
+        emitPoints(points){
+            const numericPoints = Number(points);
+            this.$emit('add-score', numericPoints)
+        }
     },
 }
 

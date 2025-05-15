@@ -3,9 +3,9 @@
         <button  class="btn-back" @click="goBack">Go back</button>
         <button class="btn-back" @click="triggerReset">New Game</button>
     </div>
-    <section class="container-wrapper-games">
-        <div v-for="n in numberOfPlayers" :key="n">
-            <Game :reset-score="resetScoreFlag"/>
+    <section class="container-wrapper-games" :class="numberOfPlayers === 1 ? 'counter-only' : numberOfPlayers === 2 ? 'duel-game' : 'royal-rumble-game'">
+        <div v-for="(n, index) in numberOfPlayers" :key="n">
+            <Game :player-index="index" :onReset="triggerReset"/>
         </div>
     </section>
 </template>
@@ -21,7 +21,7 @@ export default {
     data() {
         return {
             numberOfPlayers: 0,
-            resetScoreFlag: false
+            playerStore: usePlayerStore()
         }
     },
     methods: {
@@ -29,15 +29,13 @@ export default {
             this.$router.push('/');
         },
         triggerReset() {
-            this.resetScoreFlag = true;
-            this.$nextTick(() => {
-                this.resetScoreFlag = false;
-            })
+           this.playerStore.players.forEach(player => {
+            player.score = 0;
+           });
         }
     },
     mounted() {
-        const playerStore = usePlayerStore();
-        this.numberOfPlayers = playerStore.numberOfPlayers;
+        this.numberOfPlayers = this.playerStore.players.length;
     }
 }
 </script>
@@ -48,5 +46,8 @@ export default {
         gap: 30px;
         padding: 0px 16px;
         align-content: center;
+        &.counter-only {
+            height: 100%;
+        }
     }
 </style>
