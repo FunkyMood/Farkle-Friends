@@ -5,7 +5,7 @@
     </div>
     <section class="container-wrapper-games" :class="numberOfPlayers === 1 ? 'counter-only' : numberOfPlayers === 2 ? 'duel-game' : 'royal-rumble-game'">
         <div v-for="(n, index) in numberOfPlayers" :key="n">
-            <Game :player-index="index" :onReset="triggerReset"/>
+            <Game :player-index="index" :reset-flag="resetFlag"/>
         </div>
     </section>
 </template>
@@ -21,7 +21,8 @@ export default {
     data() {
         return {
             numberOfPlayers: 0,
-            playerStore: usePlayerStore()
+            playerStore: usePlayerStore(),
+            resetFlag: false
         }
     },
     methods: {
@@ -30,8 +31,13 @@ export default {
         },
         triggerReset() {
            this.playerStore.players.forEach(player => {
-            player.score = 0;
+            player.score = [];
+            this.playerStore.getTotalScore(0)
            });
+           this.resetFlag = false;
+           this.$nextTick(() => {
+                this.resetFlag = true;
+           })
         }
     },
     mounted() {

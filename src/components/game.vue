@@ -1,14 +1,14 @@
 <template>
         <div class="container-game">
             <h1 class="score__title">{{ score }}</h1>
-            <div class="d-flex gap-1 flex-wrap">
+            <div class="d-flex gap-1 flex-wrap temprary-score-wrapper">
                 <p class="temporary-score m-0" v-for="(temporaryScore, index) in scoreStacks" :key="index"> {{ temporaryScore }}</p>
             </div>
             <div class="d-flex justify-content-center gap-3 flex-wrap mt-2">
                 <ScoreButton :player-index="playerIndex" @add-score="addTemporaryScore"></ScoreButton>
             </div>
-            <div class="d-flex justify-content-center gap-2">
-                <button class="mt-2" @click="undo()">Undo</button>
+            <div class="btn-wrapper d-flex justify-content-center gap-2">
+                <button class="mt-2 btn-undo" @click="undo()" :class="(this.scoreStacks.length > 0 ? 'temporary-color' : 'total-color')" >Undo</button>
                 <button class="mt-2" @click="increaseScore()">Add Score</button>
             </div>
         </div>
@@ -35,12 +35,15 @@ export default {
         playerIndex: {
             type: Number,
             default: 0
+        },
+        resetFlag: {
+            type: Boolean,
         }
     },
     computed: {
         score() {
-            return this.playerStore.players[this.playerIndex].score;
-        }
+            return this.playerStore.getTotalScore(this.playerIndex);
+        },
     },
     methods: {
         increaseScore(){
@@ -56,6 +59,8 @@ export default {
         undo() {
             if (this.scoreStacks.length > 0) {
                 this.scoreStacks.pop();
+            } else {
+                this.playerStore.undoTotalScore(this.playerIndex)
             }
         },
         async wakeLockMobile() {
@@ -77,8 +82,10 @@ export default {
         },
     },  
     watch:{
-        resetScore(){
-            this.score = 0;
+        resetFlag(newVal) {
+            if(newVal) {
+                this.scoreStacks.length = [];
+            }
         }
     },
     mounted() {
@@ -90,15 +97,35 @@ export default {
 <style lang="less">
 @media screen and (min-width: 300px) {
     .container-game {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         &:not(:first-of-type) {
             padding-top: 20px;
         }
         .score__title {
-            color: #ffffff;
-            padding-bottom: 20px;
+            color: var(--bs-warning);
+            width: fit-content;
+            font-size: 32px;
+            font-weight: 700;
         }
-        .temporary-score {
-            color:#ffffff;
+        .temprary-score-wrapper {
+            min-height: 33px;
+            .temporary-score {
+                color: #20C997;
+                font-weight: 700;
+                font-size: 22px;
+            }
+        }
+        .btn-wrapper {
+            .btn-undo {
+                &.temporary-color {
+                    background-color: #20C997;
+                }
+                &.total-color {
+                    background-color: var(--bs-warning);
+                }
+            }
         }
     }
 }

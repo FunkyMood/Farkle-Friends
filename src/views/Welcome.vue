@@ -2,7 +2,7 @@
     <section class="container-welcome">
         <h1>Welcome to Farkle&Friends!</h1>
         <button class="btn-start" @click="setPlayers(1)">Points Counter</button>
-        <button class="btn-start" @click="setPlayers()">Game</button>
+        <button class="btn-start" disabled @click="setPlayers()">Game</button>
     </section>
 </template>
 
