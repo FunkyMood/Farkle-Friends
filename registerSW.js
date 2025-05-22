@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/Farkle-Friends/sw.js', { scope: '/Farkle-Friends/' })})}
