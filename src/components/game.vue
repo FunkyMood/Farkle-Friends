@@ -9,7 +9,8 @@
             </div>
             <div class="btn-wrapper d-flex justify-content-center gap-2">
                 <button class="mt-2 btn-undo" @click="undo()" :class="(this.scoreStacks.length > 0 ? 'temporary-color' : 'total-color')" >Undo</button>
-                <button class="mt-2" @click="increaseScore()">Add Score</button>
+                <button class="mt-2 btn-undo" @click="this.scoreStacks.length = 0" >Farkle</button>
+                <button :disabled="scoreStacks <= 0" class="mt-2" @click="increaseScore()">Add Score</button>
             </div>
         </div>
 </template>
@@ -25,7 +26,7 @@ export default {
   },
     data() {
         return {
-            scoreStacks: [],
+            //scoreStacks: [],
             playerStore: usePlayerStore(),
             wakeLoock: false,
             totalScore: 0,
@@ -44,17 +45,16 @@ export default {
         score() {
             return this.playerStore.getTotalScore(this.playerIndex);
         },
+        scoreStacks() {
+            return this.playerStore.players[this.playerIndex].score;
+        }
     },
     methods: {
         increaseScore(){
-            this.scoreStacks.forEach(score => {
-                this.playerStore.addPoints(this.playerIndex , score)
-            });
-            this.scoreStacks.length = 0;
-            
+            this.playerStore.setTotalScore(this.playerIndex);
         },
         addTemporaryScore(points) {
-            this.scoreStacks.push(points)
+            this.scoreStacks.push(points);
         },
         undo() {
             if (this.scoreStacks.length > 0) {

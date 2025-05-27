@@ -14,7 +14,7 @@ export default defineConfig({
         name: 'Farkle&Friends',
         short_name: 'Farkle&Friends',
         start_url: '.',
-        display: 'fullscreen',
+        display: 'standalone',
         background_color: '#212121',
         theme_color: '#212121',
         icons: [
