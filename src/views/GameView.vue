@@ -31,8 +31,7 @@ export default {
         },
         triggerReset() {
            this.playerStore.players.forEach(player => {
-            player.score = [];
-            this.playerStore.getTotalScore(0)
+            player.totalPoints = [];
            });
            this.resetFlag = false;
            this.$nextTick(() => {
